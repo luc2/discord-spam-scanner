@@ -35,6 +35,12 @@ Holà ! C'est du **spam**, ça ! Vous croyez que je le vois pas ? Vous me prenez
 
 *... (à compléter)*
 
+## Grafrikart
+
+Si je dis "**Grafrikart**" au lieu de "**Grafikart**", c'est parce que dans l'une de ses vidéos, il dit "**Grafrikart**", et comme je suis un gros moqueur, je n'arrive pas à me le sortir de la tête... Je ne sais plus dans quelle vidéo il dit ça, c'était vers la fin d'une vidéo, j'ai peut-être fait une vanne en commentaire à ce sujet... Celui qui trouve de quelle vidéo il s'agit marque **cinquante points** !
+
+![Le chevalier mystère](images/chevalier-mystere.png)
+
 ## Lien vers le chef-d'œuvre
 
 <https://github.com/luc2/discord-spam-scanner>
