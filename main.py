@@ -171,7 +171,7 @@ async def detect(interaction: discord.Interaction) -> None:
  
     await interaction.response.defer(ephemeral=True)
  
-    all_attachments = await collect_all_attachments(interaction.guild.channels)
+    all_attachments = await collect_all_attachments(interaction.guild.text_channels)
     suspects = build_suspect_list(all_attachments)
     await send_scan_report(interaction, suspects)
 
