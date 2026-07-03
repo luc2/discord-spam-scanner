@@ -33,6 +33,14 @@ Holà ! C'est du **spam**, ça ! Vous croyez que je le vois pas ? Vous me prenez
     - Voir les anciens messages
 14. Copie l'URL générée, et ouvre-la dans un nouvel onglet. Tu vas pouvoir ajouter le bot à ton serveur Discord.
 
+## Contrôler le bot
+
+Pour contrôler le bot, il faut coder... tu sais coder ? J'ai fait ça en **Python**, le langage le plus détesté de la communauté **Grafrikart**, mais il a joué à **The Farmer Was Replaced**, alors il va bientôt sombrer dans le côté obscur du code...
+
+1. `git clone https://github.com/luc2/discord-spam-scanner.git`
+2. Installe [uv], j'utilise ça pour gérer les dépendances.
+3. ...
+
 *... (à compléter)*
 
 ## Grafrikart
@@ -44,3 +52,5 @@ Si je dis "**Grafrikart**" au lieu de "**Grafikart**", c'est parce que dans l'un
 ## Lien vers le chef-d'œuvre
 
 <https://github.com/luc2/discord-spam-scanner>
+
+[uv]: https://docs.astral.sh/uv/

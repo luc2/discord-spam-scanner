@@ -22,3 +22,5 @@
 {"rule":"FR_SPELLING_RULE","sentence":"^\\QDans \"Générateur d'URL OAuth2\", coche \"bot\" et \"applications.commands\".\\E$"}
 {"rule":"POINT","sentence":"^\\QDans \"Générateur d'URL OAuth2\", coche :\n\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q\nDeux blocs supplémentaires vont apparaître pour te rendre fou :\nPermissions du bot\nType d'intégration\nDans \"Permissions du bot\", coche :\nVoir les salons\\E$"}
 {"rule":"POINT","sentence":"^\\QDans \"Générateur d'URL OAuth2\", coche :\n\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q\nDeux blocs supplémentaires vont apparaître pour te rendre fou :\nPermissions du bot\nType d'intégration\nDans \"Permissions du bot\", coche :\nVoir les salons\nVoir les anciens messages\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QInstaller uv\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q\nInstalle uv, j'utilise ça pour gérer les dépendances.\\E$"}
