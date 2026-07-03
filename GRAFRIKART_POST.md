@@ -38,10 +38,39 @@ Holà ! C'est du **spam**, ça ! Vous croyez que je le vois pas ? Vous me prenez
 Pour contrôler le bot, il faut coder... tu sais coder ? J'ai fait ça en **Python**, le langage le plus détesté de la communauté **Grafrikart**, mais il a joué à **The Farmer Was Replaced**, alors il va bientôt sombrer dans le côté obscur du code...
 
 1. `git clone https://github.com/luc2/discord-spam-scanner.git`
-2. Installe [uv], j'utilise ça pour gérer les dépendances.
-3. ...
+2. `cd discord-spam-scanner`
+3. Installe [uv], j'utilise ça pour gérer les dépendances.
+4. `uv sync` pour installer les dépendances Python.
+5. `cp .env.example .env`.
+6. `vim .env` pour foutre le token que tu as copié à l'étape 9 de la section précédente.
+7. Lance le bot avec : `uv run main.py`
+7. Si tout fonctionne, tu devrais voir dans le terminal : `Logged in as SpamScanner` (ou le nom que tu as choisi).
+8. Va sur Discord, dans le serveur où tu as foutu le bot, et tape : `/detect`
+9. Le bot te sortir un score pour les spammeurs qu'il suspecte.
+10. Je ne l'ai testé que sur mon serveur, mais **ma tête à couper** qu'il aurait détecté **CyberNinja1109** !
 
-*... (à compléter)*
+![Rapport](images/report.png)
+
+## C'était facile
+
+12 lignes de code seulement, en comptant les lignes vides :
+
+```python
+@bot.tree.command(
+    name="detect",
+    description="Collect attachments, calculate MD5 hashes, and score spammers",
+)
+async def detect(interaction: discord.Interaction) -> None:
+    print(f"\n--- /detect requested by {interaction.user.name} ---")
+ 
+    await interaction.response.defer(ephemeral=True)
+ 
+    all_attachments = await collect_all_attachments(interaction.guild.text_channels)
+    suspects = build_suspect_list(all_attachments)
+    await send_scan_report(interaction, suspects)
+```
+
+Mais plus sérieusement, ce n'était pas aussi facile que je le pensais, normal que monsieur **Grafrikart** n'ait pas pris le temps de le faire...
 
 ## Grafrikart
 
