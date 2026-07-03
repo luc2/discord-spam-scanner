@@ -72,6 +72,12 @@ async def detect(interaction: discord.Interaction) -> None:
 
 Mais plus sérieusement, ce n'était pas aussi facile que je le pensais, normal que monsieur **Grafrikart** n'ait pas pris le temps de le faire...
 
+## Mais ce n'est pas fini !
+
+Arrêtez tout ! Faites revenir le développeur ! Il n'a pas fini là ! Il a juste fait la **détection** ! Et la **modération** ? Où est-elle ? Il s'est payé notre tête !
+
+**Le plus dur**, c'est de **créer le bot**, et de faire le **squelette** du code... avec Gemini et Copilot... La modération, c'est **plus facile** à faire, il faut juste continuer, alors je m'en fous. En plus je n'ai pas envie de me faire bannir de mon propre serveur. Vous me prenez pour un con ou quoi ?
+
 ## Grafrikart
 
 Si je dis "**Grafrikart**" au lieu de "**Grafikart**", c'est parce que dans l'une de ses vidéos, il dit "**Grafrikart**", et comme je suis un gros moqueur, je n'arrive pas à me le sortir de la tête... Je ne sais plus dans quelle vidéo il dit ça, c'était vers la fin d'une vidéo, j'ai peut-être fait une vanne en commentaire à ce sujet... Celui qui trouve de quelle vidéo il s'agit marque **cinquante points** !

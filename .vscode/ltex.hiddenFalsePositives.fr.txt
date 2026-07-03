@@ -30,3 +30,4 @@
 {"rule":"OU_LEQUEL","sentence":"^\\QVa sur Discord, dans le serveur où tu as foutu le bot, et tape : \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q\nLe bot va parcourir les messages (limite définie par \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q), calculer les MD5 des pièces jointes, et te donner un rapport des spammeurs qui ont envoyé les mêmes fichiers sur plusieurs canaux.\\E$"}
 {"rule":"FR_SPELLING_RULE","sentence":"^\\QMa tête à couper qu'il aurait accusé CyberNinja1109 !\\E$"}
 {"rule":"OU_LEQUEL","sentence":"^\\QVa sur Discord, dans le serveur où tu as foutu le bot, et tape : \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q\nLe bot te sortir un score pour les spammeurs qu'il suspecte.\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QLe plus dur, c'est de créer le bot, et de faire le squelette du code... avec Gemini et Copilot...\\E$"}
