@@ -1,0 +1,10 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qdiscord-spam-scanner\\E$"}
+{"rule":"A_A_ACCENT","sentence":"^\\QA discord bot to detect spam.\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QThis repository is a nod to the French-speaking Grafikart community, which is why the documentation and context are written in French.\\E$"}
+{"rule":"TIRET","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q Le fichier que je vais poster dans le canal \"vos-créations\" du Discord de monsieur Grafrikart\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q Le fichier que je vais poster dans le canal \"vos-créations\" du Discord de monsieur Grafrikart\\E$"}
+{"rule":"POINTS_SUSPENSIONS_SPACE","sentence":"^\\Q...mais pourquoi je dis \"Grafrikart\" au lieu de \"Grafikart\" ?\\E$"}
+{"rule":"FR_SPELLING_RULE","sentence":"^\\QSpam du très respectable CyberNinja1109\\E$"}
+{"rule":"P_V_PAS","sentence":"^\\QVous croyez que je le vois pas ?\\E$"}
+{"rule":"ESPACE_APRES_POINT","sentence":"^\\QEt pourquoi le !bot de monsieur Grafrikart ne fait rien ?\\E$"}
+{"rule":"OU_PAS","sentence":"^\\QC'est dur de coder l'anti-spam ou pas ?\\E$"}
