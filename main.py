@@ -1,4 +1,6 @@
 import os
+from collections import defaultdict
+
 import discord
 from discord import app_commands
 from dotenv import load_dotenv
@@ -36,40 +38,79 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
 
 
-@bot.tree.command(name="detect", description="Scan channels and print the latest messages in the terminal")
+@bot.tree.command(name="detect", description="Collect attachments and calculate spam scores")
 async def detect(interaction: discord.Interaction):
-    # await interaction.response.send_message("Hello World !", ephemeral=True)
-
-    # channels = interaction.guild.text_channels
-    # channels_string = "\n".join([f"- {c.name} (ID: {c.id})" for c in channels])
-    # response_text = f"**Liste des canaux textuels :**\n{channels_string}"
-    # await interaction.response.send_message(response_text, ephemeral=True)
-
-    # Acknowledge the interaction immediately to prevent 3-second timeouts
     await interaction.response.defer(ephemeral=True)
-
+    
     channels = interaction.guild.text_channels
-    print(f"\n--- STARTING CHANNEL SCAN (Limit per channel: {MSG_LIMIT}) ---")
+    print(f"\n--- STARTING DATA COLLECTION (History limit: {MSG_LIMIT}) ---")
+    
+    # Structure requested: { "Username": [{"filename": "...", "md5": "...", "channel": "..."}] }
+    attachments = defaultdict(list)
     
     for channel in channels:
-        print(f"\n[Channel: #{channel.name}]")
+        processed_users_in_channel = set()
+        
         try:
-            # 3. Stream and print history to the terminal only
             async for message in channel.history(limit=MSG_LIMIT):
-                timestamp = message.created_at.strftime("%Y-%m-%d %H:%M:%S")
-                print(f"  - [{timestamp}] [{message.author.name}]: {message.content[:50]}")
+                if message.author.bot:
+                    continue
+                
+                user = message.author.name
+                
+                if user in processed_users_in_channel:
+                    continue
+                
+                processed_users_in_channel.add(user)
+                
+                if message.attachments:
+                    for attachment in message.attachments:
+                        # Storing MD5 placeholder as "123" for now since discord.py doesn't provide it directly
+                        attachments[user].append({
+                            "filename": attachment.filename,
+                            "md5": "123",  
+                            "channel": f"#{channel.name}"
+                        })
+                        print(f"[Collected] Recorded attachment from {user} in #{channel.name}")
+                            
         except discord.Forbidden:
-            print("  [Error: Missing permissions to read this channel]")
+            print(f"  [Error: Missing permissions for #{channel.name}]")
         except discord.HTTPException as e:
-            print(f"  [API Error: {e}]")
+            print(f"  [API Error in #{channel.name}: {e}]")
+            
+    print("\n--- PROCESSING SCORES ---")
+    
+    guilty_list = []
+    
+    # Calculate scores at the end based on the collected structure
+    for user, file_list in attachments.items():
+        # Track unique files seen for this user across channels using filename
+        # (Can be switched to MD5 later when hash calculation is added)
+        seen_files = set()
+        score = 0
+        
+        for file_data in file_list:
+            file_id = file_data["filename"]
+            
+            if file_id in seen_files:
+                score += 2
+            else:
+                seen_files.add(file_id)
+                score += 1
+                
+        print(f"User: {user} | Total Attachments: {len(file_list)} | Final Score: {score}")
+        
+        if score >= 1:
+            guilty_list.append(f"- **{user}** (Score: {score})")
             
     print("\n--- SCAN COMPLETE ---")
     
-    # Send the single allowed response interaction once backend tasks finish
-    await interaction.followup.send(
-        f"Scan complete! Check the terminal for logs (Limit: {MSG_LIMIT} messages).", 
-        ephemeral=True
-    )
+    if guilty_list:
+        report = "**Suspected Spammers (Cross-channel image duplicates):**\n" + "\n".join(guilty_list)
+    else:
+        report = "Scan finished. No cross-channel image spammers detected."
+        
+    await interaction.followup.send(report, ephemeral=True)
 
 
 if __name__ == "__main__":
