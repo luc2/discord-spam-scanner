@@ -1,5 +1,6 @@
 import os
 from collections import defaultdict
+import hashlib
 
 import discord
 from discord import app_commands
@@ -38,14 +39,13 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
 
 
-@bot.tree.command(name="detect", description="Collect attachments and calculate spam scores")
+@bot.tree.command(name="detect", description="Collect attachments, calculate MD5 hashes, and score spammers")
 async def detect(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)
     
     channels = interaction.guild.text_channels
     print(f"\n--- STARTING DATA COLLECTION (History limit: {MSG_LIMIT}) ---")
     
-    # Structure requested: { "Username": [{"filename": "...", "md5": "...", "channel": "..."}] }
     attachments = defaultdict(list)
     
     for channel in channels:
@@ -65,13 +65,21 @@ async def detect(interaction: discord.Interaction):
                 
                 if message.attachments:
                     for attachment in message.attachments:
-                        # Storing MD5 placeholder as "123" for now since discord.py doesn't provide it directly
-                        attachments[user].append({
-                            "filename": attachment.filename,
-                            "md5": "123",  
-                            "channel": f"#{channel.name}"
-                        })
-                        print(f"[Collected] Recorded attachment from {user} in #{channel.name}")
+                        try:
+                            # Read the attachment bytes directly from Discord's CDN
+                            file_bytes = await attachment.read()
+                            
+                            # Compute the MD5 hash of the file content
+                            file_md5 = hashlib.md5(file_bytes).hexdigest()
+                            
+                            attachments[user].append({
+                                "filename": attachment.filename,
+                                "md5": file_md5,  
+                                "channel": f"#{channel.name}"
+                            })
+                            print(f"[Collected] {user} in #{channel.name} -> {attachment.filename} (MD5: {file_md5})")
+                        except (discord.HTTPException, discord.NotFound) as download_err:
+                            print(f"  [Error: Could not download attachment {attachment.filename}: {download_err}]")
                             
         except discord.Forbidden:
             print(f"  [Error: Missing permissions for #{channel.name}]")
@@ -80,33 +88,34 @@ async def detect(interaction: discord.Interaction):
             
     print("\n--- PROCESSING SCORES ---")
     
-    guilty_list = []
+    suspect_list = []
     
-    # Calculate scores at the end based on the collected structure
     for user, file_list in attachments.items():
-        # Track unique files seen for this user across channels using filename
-        # (Can be switched to MD5 later when hash calculation is added)
-        seen_files = set()
+        # Using MD5 to accurately track identical images across channels
+        seen_hashes = set()
         score = 0
         
         for file_data in file_list:
-            file_id = file_data["filename"]
+            file_hash = file_data["md5"]
             
-            if file_id in seen_files:
+            if file_hash in seen_hashes:
                 score += 2
             else:
-                seen_files.add(file_id)
+                seen_hashes.add(file_hash)
                 score += 1
                 
         print(f"User: {user} | Total Attachments: {len(file_list)} | Final Score: {score}")
         
         if score >= 1:
-            guilty_list.append(f"- **{user}** (Score: {score})")
+            suspect_list.append(dict(user=user, score=score, attachments=file_list))
             
     print("\n--- SCAN COMPLETE ---")
     
-    if guilty_list:
-        report = "**Suspected Spammers (Cross-channel image duplicates):**\n" + "\n".join(guilty_list)
+    if suspect_list:
+        report = "**Suspected Spammers (Cross-channel image duplicates):**\n" + "\n".join([
+            f"- **{suspect['user']}** (Score: {suspect['score']}, Attachments: {len(suspect['attachments'])})"
+            for suspect in sorted(suspect_list, key=lambda x: x['score'], reverse=True)
+        ])
     else:
         report = "Scan finished. No cross-channel image spammers detected."
         
