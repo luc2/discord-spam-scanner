@@ -44,10 +44,10 @@ Pour contrôler le bot, il faut coder... tu sais coder ? J'ai fait ça en **Pyth
 5. `cp .env.example .env`.
 6. `vim .env` pour foutre le token que tu as copié à l'étape 9 de la section précédente.
 7. Lance le bot avec : `uv run main.py`
-7. Si tout fonctionne, tu devrais voir dans le terminal : `Logged in as SpamScanner` (ou le nom que tu as choisi).
-8. Va sur Discord, dans le serveur où tu as foutu le bot, et tape : `/detect`
-9. Le bot te sortir un score pour les spammeurs qu'il suspecte.
-10. Je ne l'ai testé que sur mon serveur, mais **ma tête à couper** qu'il aurait détecté **CyberNinja1109** !
+8. Si tout fonctionne, tu devrais voir dans le terminal : `Logged in as SpamScanner` (ou le nom que tu as choisi).
+9. Va sur Discord, dans le serveur où tu as foutu le bot, et tape : `/detect`
+10. Le bot te sortir un score pour les spammeurs qu'il suspecte.
+11. Je ne l'ai testé que sur mon serveur, mais **ma tête à couper** qu'il aurait détecté **CyberNinja1109** !
 
 ![Rapport](images/report.png)
 
