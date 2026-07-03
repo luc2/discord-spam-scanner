@@ -8,8 +8,8 @@ This repository is a nod to the French-speaking **Grafikart** community, which i
 
 ## Sommaire des fichiers
 
-| Fichier              | Description |
-|----------------------|-------------|
-| `GRAFRIKART_POST.md` | Le fichier que je vais poster dans le canal "*vos-créations*" du Discord de monsieur **Grafrikart** |
+| Fichier | Description |
+|---------|-------------|
+| [`GRAFRIKART_POST.md`](./GRAFRIKART_POST.md) | Le fichier que je vais poster dans le canal "*vos-créations*" du Discord de monsieur **Grafrikart** |
 
 ...mais pourquoi je dis "**Grafrikart**" au lieu de "**Grafikart**" ? Je dois avoir un problème mental... J'espère que c'est soignable...
